@@ -36,11 +36,11 @@ describe('sequentialize', () => {
       assert.equal(c.callCount, 1)
       assert.equal(d.callCount, 1)
 
-      assert.ok(a.firstCall.calledWithExactly(['one', 75]))
-      assert.ok(b.firstCall.calledWithExactly(['two']))
-      assert.ok(c.firstCall.calledWithExactly(['three']))
-      assert.ok(a.secondCall.calledWithExactly(['one-one', 50]))
-      assert.ok(d.firstCall.calledWithExactly(['four', 25]))
+      assert.ok(a.firstCall.calledWithExactly('one'))
+      assert.ok(b.firstCall.calledWithExactly('two'))
+      assert.ok(c.firstCall.calledWithExactly('three'))
+      assert.ok(a.secondCall.calledWithExactly('one-one'))
+      assert.ok(d.firstCall.calledWithExactly('four'))
 
       assert.isTrue(a.firstCall.calledBefore(b.firstCall))
       assert.isTrue(b.firstCall.calledBefore(c.firstCall))

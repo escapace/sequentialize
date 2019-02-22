@@ -16,7 +16,7 @@ export const sequentialize = () => {
       locks.push(lock)
 
       return Promise.all(promises)
-        .then(() => fn(args))
+        .then(() => fn(...args))
         .then(value => {
           lock.resolve()
 
