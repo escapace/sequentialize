@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "tslint-config-escapace"
+  ],
+  "rules": {
+    "promise-function-async": false,
+    "no-floating-promises": false
+  }
+}
