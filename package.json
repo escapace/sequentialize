@@ -104,6 +104,6 @@
   },
   "dependencies": {
     "tslib": "^1.9.3",
-    "lodash": "4.17.11"
+    "lodash": "4.17.13"
   }
 }
