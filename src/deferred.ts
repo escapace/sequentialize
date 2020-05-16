@@ -1,5 +1,3 @@
-/* tslint:disable promise-must-complete */
-
 /**
  * A deferred represents a promise which can be either resolved via
  * deferred.resolve or rejected via deferred.reject.The promise can be acessed
@@ -12,8 +10,12 @@ export class Deferred<T> {
   private fate: 'resolved' | 'unresolved'
   private state: 'pending' | 'fulfilled' | 'rejected'
 
-  private _resolve: Function // (value?: T | PromiseLike<T> | undefined) => void
-  private _reject: Function // (reason?: any) => void
+  private _resolve:
+    | ((value?: T | PromiseLike<T> | undefined) => void)
+    | undefined
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _reject: ((reason?: any) => void) | undefined
 
   constructor() {
     this.state = 'pending'
@@ -36,17 +38,23 @@ export class Deferred<T> {
     }
 
     this.fate = 'resolved'
-    this._resolve(value)
+
+    if (this._resolve !== undefined) {
+      this._resolve(value)
+    }
   }
 
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public reject(reason?: any) {
     if (this.fate === 'resolved') {
       throw new Error('Deferred cannot be resolved twice')
     }
 
     this.fate = 'resolved'
-    this._reject(reason)
+
+    if (this._reject !== undefined) {
+      this._reject(reason)
+    }
   }
 
   public isResolved() {
