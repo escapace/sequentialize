@@ -14,12 +14,12 @@ describe('Deferred', () => {
     assert.isFalse(d.isRejected())
   })
 
-  it('fulfilled', done => {
+  it('fulfilled', (done) => {
     const d = deferred<string>()
 
     d.resolve('abc')
 
-    d.promise.then(value => {
+    d.promise.then((value) => {
       assert.equal(value, 'abc')
 
       assert.isFalse(d.isPending())
@@ -31,12 +31,12 @@ describe('Deferred', () => {
     })
   })
 
-  it('rejected', done => {
+  it('rejected', (done) => {
     const d = deferred<string>()
 
     d.reject('abc')
 
-    d.promise.catch(value => {
+    d.promise.catch((value) => {
       assert.equal(value, 'abc')
 
       assert.isFalse(d.isPending())
