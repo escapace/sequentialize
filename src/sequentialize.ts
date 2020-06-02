@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/promise-function-async */
 
-import { map, remove } from 'lodash'
 import { Deferred } from './deferred'
 
 export const sequentialize = () => {
@@ -8,10 +7,14 @@ export const sequentialize = () => {
 
   return <T extends (...args: any[]) => Promise<any>>(fn: T): T => {
     return ((...args: any[]) => {
-      remove(locks, (deferred) => deferred.isResolved())
+      for (let l = locks.length - 1; l >= 0; l -= 1) {
+        if (locks[l].isRejected()) {
+          locks.splice(l, 1)
+        }
+      }
 
       const lock = new Deferred<any>()
-      const promises = map(locks, ({ promise }) => promise)
+      const promises = locks.map(({ promise }) => promise)
 
       locks.push(lock)
 
