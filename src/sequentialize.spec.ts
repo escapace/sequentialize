@@ -1,8 +1,8 @@
 import { sequentialize } from './sequentialize'
-
-import 'mocha'
 import { assert } from 'chai'
-import { spy } from 'sinon'
+import sinon from 'sinon'
+
+const spy = sinon.spy
 
 function delay(str: string, interval = 10) {
   return new Promise((resolve) => setTimeout(() => resolve(str), interval))

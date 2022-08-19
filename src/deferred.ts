@@ -22,7 +22,7 @@ export class Deferred<T> {
     this.fate = 'unresolved'
 
     this.promise = new Promise((resolve, reject) => {
-      this._resolve = resolve
+      this._resolve = resolve as typeof this._resolve
       this._reject = reject
     })
 
