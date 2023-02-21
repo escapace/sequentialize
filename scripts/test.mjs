@@ -23,7 +23,7 @@ const entryPoints = await fastGlob(['**/*.spec.?(m)(j|t)s?(x)'], {
 await build({
   bundle: true,
   entryPoints,
-  external: ['sinon', ...external],
+  external,
   format: 'esm',
   logLevel: 'info',
   outbase: directorySrc,
