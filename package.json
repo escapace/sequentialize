@@ -33,7 +33,7 @@
     "prettier-config-escapace": "1.0.5",
     "semver": "7.5.1",
     "sinon": "15.1.0",
-    "syncpack": "10.1.0",
+    "syncpack": "11.2.1",
     "typescript": "5.0.4"
   },
   "engines": {
