@@ -1,10 +1,10 @@
 {
-  "root": true,
-  "parserOptions": {
-    "warnOnUnsupportedTypeScriptVersion": false,
-    "project": "./tsconfig.json"
-  },
   "extends": ["escapace"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "warnOnUnsupportedTypeScriptVersion": false
+  },
+  "root": true,
   "rules": {
     "@typescript-eslint/no-floating-promises": 0,
     "@typescript-eslint/promise-function-async": 0
