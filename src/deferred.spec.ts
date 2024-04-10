@@ -1,5 +1,5 @@
-import { deferred } from './deferred'
 import { assert } from 'chai'
+import { deferred } from './deferred'
 
 describe('Deferred', () => {
   it('pending', () => {
@@ -16,7 +16,7 @@ describe('Deferred', () => {
 
     d.resolve('abc')
 
-    d.promise.then((value) => {
+    void d.promise.then((value) => {
       assert.equal(value, 'abc')
 
       assert.isFalse(d.isPending())

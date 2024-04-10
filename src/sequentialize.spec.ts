@@ -1,11 +1,13 @@
-import { sequentialize } from './sequentialize'
 import { assert } from 'chai'
 import sinon from 'sinon'
+import { sequentialize } from './sequentialize'
 
 const spy = sinon.spy
 
-function delay(str: string, interval = 10) {
-  return new Promise((resolve) => setTimeout(() => resolve(str), interval))
+async function delay(str: string, interval = 10) {
+  return await new Promise((resolve) =>
+    setTimeout(() => resolve(str), interval)
+  )
 }
 
 describe('sequentialize', () => {
@@ -18,14 +20,14 @@ describe('sequentialize', () => {
     const d = spy()
 
     const one = wrap(delay)
-    const two = wrap(<T>(value: T) => Promise.reject(value))
-    const three = wrap((value: string) => Promise.resolve(value))
+    const two = wrap(async <T>(value: T) => await Promise.reject(value))
+    const three = wrap(async (value: string) => await Promise.resolve(value))
     const four = wrap(delay)
 
-    one('one', 75).then(a)
-    two('two').catch(b)
-    three('three').then(c)
-    one('one-one', 50).then(a)
+    void one('one', 75).then(a)
+    void two('two').catch(b)
+    void three('three').then(c)
+    void one('one-one', 50).then(a)
 
     four('four', 25)
       .then(d)
