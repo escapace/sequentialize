@@ -5,17 +5,17 @@
  */
 
 export class Deferred<T> {
-  public promise: Promise<T>
-
-  private fate: 'resolved' | 'unresolved'
-  private state: 'pending' | 'fulfilled' | 'rejected'
-
-  private _resolve:
-    | ((value?: T | PromiseLike<T> | undefined) => void)
-    | undefined
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _reject: ((reason?: any) => void) | undefined
+
+  private _resolve:
+    | ((value?: PromiseLike<T> | T | undefined) => void)
+    | undefined
+  private fate: 'resolved' | 'unresolved'
+
+  private state: 'fulfilled' | 'pending' | 'rejected'
+
+  public promise: Promise<T>
 
   constructor() {
     this.state = 'pending'
@@ -32,16 +32,20 @@ export class Deferred<T> {
     )
   }
 
-  public resolve(value?: T | PromiseLike<T> | undefined) {
-    if (this.fate === 'resolved') {
-      throw new Error('Deferred cannot be resolved twice')
-    }
+  public isFulfilled() {
+    return this.state === 'fulfilled'
+  }
 
-    this.fate = 'resolved'
+  public isPending() {
+    return this.state === 'pending'
+  }
 
-    if (this._resolve !== undefined) {
-      this._resolve(value)
-    }
+  public isRejected() {
+    return this.state === 'rejected'
+  }
+
+  public isResolved() {
+    return this.fate === 'resolved'
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -57,20 +61,16 @@ export class Deferred<T> {
     }
   }
 
-  public isResolved() {
-    return this.fate === 'resolved'
-  }
+  public resolve(value?: PromiseLike<T> | T | undefined) {
+    if (this.fate === 'resolved') {
+      throw new Error('Deferred cannot be resolved twice')
+    }
 
-  public isPending() {
-    return this.state === 'pending'
-  }
+    this.fate = 'resolved'
 
-  public isFulfilled() {
-    return this.state === 'fulfilled'
-  }
-
-  public isRejected() {
-    return this.state === 'rejected'
+    if (this._resolve !== undefined) {
+      this._resolve(value)
+    }
   }
 }
 
