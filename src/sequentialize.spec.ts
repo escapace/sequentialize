@@ -4,9 +4,9 @@ import { sequentialize } from './sequentialize'
 
 const spy = sinon.spy
 
-async function delay(str: string, interval = 10) {
+async function delay(string_: string, interval = 10) {
   return await new Promise((resolve) =>
-    setTimeout(() => resolve(str), interval)
+    setTimeout(() => resolve(string_), interval)
   )
 }
 
