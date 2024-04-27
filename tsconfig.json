@@ -10,7 +10,7 @@
     "isolatedModules": true,
     "lib": ["esnext"],
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -23,5 +23,5 @@
     "typeRoots": ["node_modules/@types"],
     "useDefineForClassFields": true
   },
-  "include": ["src"]
+  "exclude": ["lib"]
 }

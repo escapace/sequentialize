@@ -1,4 +1,4 @@
-import { assert } from 'chai'
+import { assert, describe, it } from 'vitest'
 import { deferred } from './deferred'
 
 describe('Deferred', () => {
@@ -11,39 +11,41 @@ describe('Deferred', () => {
     assert.isFalse(d.isRejected())
   })
 
-  it('fulfilled', (done) => {
-    const d = deferred<string>()
+  it('fulfilled', async () =>
+    await new Promise<void>((done) => {
+      const d = deferred<string>()
 
-    d.resolve('abc')
+      d.resolve('abc')
 
-    void d.promise.then((value) => {
-      assert.equal(value, 'abc')
+      void d.promise.then((value) => {
+        assert.equal(value, 'abc')
 
-      assert.isFalse(d.isPending())
-      assert.isTrue(d.isResolved())
-      assert.isTrue(d.isFulfilled())
-      assert.isFalse(d.isRejected())
+        assert.isFalse(d.isPending())
+        assert.isTrue(d.isResolved())
+        assert.isTrue(d.isFulfilled())
+        assert.isFalse(d.isRejected())
 
-      done()
-    })
-  })
+        done()
+      })
+    }))
 
-  it('rejected', (done) => {
-    const d = deferred<string>()
+  it('rejected', async () =>
+    await new Promise<void>((done) => {
+      const d = deferred<string>()
 
-    d.reject('abc')
+      d.reject('abc')
 
-    d.promise.catch((value) => {
-      assert.equal(value, 'abc')
+      d.promise.catch((value) => {
+        assert.equal(value, 'abc')
 
-      assert.isFalse(d.isPending())
-      assert.isTrue(d.isResolved())
-      assert.isFalse(d.isFulfilled())
-      assert.isTrue(d.isRejected())
+        assert.isFalse(d.isPending())
+        assert.isTrue(d.isResolved())
+        assert.isFalse(d.isFulfilled())
+        assert.isTrue(d.isRejected())
 
-      done()
-    })
-  })
+        done()
+      })
+    }))
 
   it('resolved twice', () => {
     assert.throws(() => {
