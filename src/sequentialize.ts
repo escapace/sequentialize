@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/promise-function-async */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable typescript/promise-function-async */
+/* eslint-disable typescript/no-unsafe-return */
+/* eslint-disable typescript/no-unsafe-argument */
+/* eslint-disable typescript/no-explicit-any */
 
 import { Deferred } from './deferred'
 
