@@ -1,7 +1,8 @@
-/* eslint-disable typescript/promise-function-async */
-/* eslint-disable typescript/no-unsafe-return */
-/* eslint-disable typescript/no-unsafe-argument */
 /* eslint-disable typescript/no-explicit-any */
+/* eslint-disable typescript/no-unsafe-argument */
+/* eslint-disable typescript/no-unsafe-return */
+/* eslint-disable typescript/prefer-promise-reject-errors */
+/* eslint-disable typescript/promise-function-async */
 
 import { Deferred } from './deferred'
 
@@ -11,13 +12,13 @@ export const sequentialize = () => {
   return <T extends (...arguments_: any[]) => Promise<any>>(function_: T): T =>
     ((...arguments_: any[]) => {
       for (let l = locks.length - 1; l >= 0; l -= 1) {
-        if (locks[l].isRejected()) {
+        if (locks[l].isResolved()) {
           locks.splice(l, 1)
         }
       }
 
       const lock = new Deferred<any>()
-      const promises = locks.map(({ promise }) => promise)
+      const promises = [...locks].map((value) => value.promise)
 
       locks.push(lock)
 
@@ -29,9 +30,9 @@ export const sequentialize = () => {
           return value
         })
         .catch((reason) => {
-          lock.resolve()
+          lock.reject(reason)
 
-          throw reason
+          return Promise.reject(reason)
         })
     }) as T
 }
