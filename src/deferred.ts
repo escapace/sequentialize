@@ -8,7 +8,7 @@ export class Deferred<T> {
   // eslint-disable-next-line typescript/no-explicit-any
   private _reject: ((reason?: any) => void) | undefined
 
-  private _resolve: ((value?: PromiseLike<T> | T | undefined) => void) | undefined
+  private _resolve: ((value?: PromiseLike<T> | T) => void) | undefined
   private fate: 'resolved' | 'unresolved'
 
   private state: 'fulfilled' | 'pending' | 'rejected'
@@ -59,7 +59,7 @@ export class Deferred<T> {
     }
   }
 
-  public resolve(value?: PromiseLike<T> | T | undefined) {
+  public resolve(value?: PromiseLike<T> | T) {
     if (this.fate === 'resolved') {
       throw new Error('Deferred cannot be resolved twice')
     }
