@@ -71,5 +71,3 @@ export class Deferred<T> {
     }
   }
 }
-
-export const deferred = <T>() => new Deferred<T>()

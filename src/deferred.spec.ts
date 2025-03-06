@@ -1,9 +1,9 @@
 import { assert, describe, it } from 'vitest'
-import { deferred } from './deferred'
+import { Deferred } from './deferred'
 
 describe('Deferred', () => {
   it('pending', () => {
-    const d = deferred()
+    const d = new Deferred()
 
     assert.isTrue(d.isPending())
     assert.isFalse(d.isResolved())
@@ -13,7 +13,7 @@ describe('Deferred', () => {
 
   it('fulfilled', async () =>
     await new Promise<void>((done) => {
-      const d = deferred<string>()
+      const d = new Deferred<string>()
 
       d.resolve('abc')
 
@@ -31,7 +31,7 @@ describe('Deferred', () => {
 
   it('rejected', async () =>
     await new Promise<void>((done) => {
-      const d = deferred<string>()
+      const d = new Deferred<string>()
 
       d.reject('abc')
 
@@ -49,14 +49,14 @@ describe('Deferred', () => {
 
   it('resolved twice', () => {
     assert.throws(() => {
-      const d = deferred<string>()
+      const d = new Deferred<string>()
 
       d.reject('abc')
       d.reject('abc')
     }, /Deferred cannot be resolved twice/)
 
     assert.throws(() => {
-      const d = deferred<string>()
+      const d = new Deferred<string>()
 
       d.resolve('abc')
       d.resolve('abc')
