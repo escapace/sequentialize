@@ -64,20 +64,3 @@ void mayFail(false).catch(() => console.log('Call 3 failed')) // logs "Call 3 fa
 Returns a wrapper function that converts async functions to sequential execution.
 
 **Returns:** `<T>(fn: T) => T` - A function that wraps async functions
-
-### Deferred<T>
-
-A promise wrapper with manual resolution control. Used internally by sequentialize.
-
-**Methods:**
-
-- `resolve(value?: T | PromiseLike<T>)` - Resolve the promise
-- `reject(reason?: any)` - Reject the promise
-- `isPending()` - Check if promise is pending
-- `isFulfilled()` - Check if promise fulfilled successfully
-- `isRejected()` - Check if promise was rejected
-- `isResolved()` - Check if promise has been resolved (fulfilled or rejected)
-
-**Properties:**
-
-- `promise: Promise<T>` - The underlying promise

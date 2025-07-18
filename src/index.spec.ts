@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 import { assert, describe, expect, it, vi } from 'vitest'
-import { sequentialize } from './sequentialize'
+import { sequentialize } from './index'
 
 const createDelay = (
   string: string,
