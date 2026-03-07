@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@escapace/deferred':
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: ^2.0.0
+        version: 2.0.0
     devDependencies:
       '@commitlint/cli':
         specifier: 19.8.1
@@ -326,9 +326,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@escapace/deferred@1.1.1':
-    resolution: {integrity: sha512-aIE3h1dexUN0D75PrthDFnaoxdIMp9LQOSc6tGFvfbwOHlt1/ICYAsqGGn/F9Yj4O7xJsdxSgwUgGn/oMhWzmw==}
-    engines: {pnpm: '>=10.10.0'}
+  '@escapace/deferred@2.0.0':
+    resolution: {integrity: sha512-3wXRbLveO912GsOMX75v5XNpXRbOodcMCCxel+XJP9gjC1dXv3kXZ6kEgk5GZt/SLisjcluGi8t7hWXMlU+kHg==}
+    engines: {pnpm: '>=10.29.2'}
 
   '@escapace/pnpm-pack@0.8.0':
     resolution: {integrity: sha512-Al/mku1P/6poaWL6dluAnEt7DGGkL4bbC7GUyOU01tsN8scaymqPX/iVvobXWI4U97NbtRXXy7XuIQPqWNOZeg==}
@@ -3171,7 +3171,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.12':
     optional: true
 
-  '@escapace/deferred@1.1.1': {}
+  '@escapace/deferred@2.0.0': {}
 
   '@escapace/pnpm-pack@0.8.0(@pnpm/logger@5.2.0)':
     dependencies:
