@@ -96,7 +96,7 @@ describe('sequentialize', () => {
     assert.ok(soupSpy.mock.calls.flat().every((value) => value === 'soup'))
   })
 
-  it('error', async () => {
+  it('rejects from a plain async function', async () => {
     const throws = async () => {
       await new Promise<void>((_, reject) => {
         setTimeout(() => {
@@ -105,10 +105,10 @@ describe('sequentialize', () => {
       })
     }
 
-    await expect(throws).rejects.toThrowError()
+    await expect(throws).rejects.toThrowError(/set-timeout/)
   })
 
-  it('error', async () => {
+  it('rejects from a sequentialized function', async () => {
     const wrap = sequentialize()
 
     const throws = async () => {
@@ -127,7 +127,7 @@ describe('sequentialize', () => {
     await expect(throws).rejects.toThrowError(/set-timeout/)
   })
 
-  it('error', async () => {
+  it('rejects when createDelay is configured to reject', async () => {
     const wrap = sequentialize()
     const throws = async () => {
       const function_ = createDelay('delay', wrap, 'reject')[0]
@@ -138,7 +138,7 @@ describe('sequentialize', () => {
     await expect(throws).rejects.toThrowError(/delay/)
   })
 
-  it('error', { repeats: 5, timeout: 10_000 }, async () => {
+  it('recovers queue execution after a rejection', { repeats: 5, timeout: 10_000 }, async () => {
     const wrap = sequentialize()
 
     const [yolk, yolkSpy] = createDelay('yolk', wrap)
